@@ -8,7 +8,7 @@ import java.util.Scanner;
 
 public class Main {
 
-    public static int order = 4;
+    public static int order = 3;
 
     public static void main(String[] args) {
 
@@ -26,7 +26,7 @@ public class Main {
         } else {
             try {
                 xy_tree = new XY_Tree();
-                BufferedReader bin = new BufferedReader(new FileReader("/Users/naimul7/JavaProjects/CubicSplineInterpolation/src/main/data.txt"));
+                BufferedReader bin = new BufferedReader(new FileReader("/Users/naimul7/JavaProjects/LagrangeInterpolation/src/main/java/dataset.txt"));
 
                 String strX = "";
                 String strY = "";
@@ -45,7 +45,7 @@ public class Main {
 
         System.out.println(xy_tree);
 
-        System.out.println(xy_tree.Lagrange(order));
+        System.out.println(xy_tree.Lagrange(order+1));
 
         System.out.println();
         System.out.println("Please provide a value at which you wish the find the value for f(x). ");
@@ -53,8 +53,12 @@ public class Main {
         xy_tree.setValue( (new Scanner(System.in)).nextDouble() );
 
         System.out.println();
-        System.out.println(xy_tree.LagrangeReplacement(order));
+        System.out.println(xy_tree.LagrangeReplacement(order+1));
 
+        System.out.println("Lagrange value: " + xy_tree.LagrangeValue(order+1));
+
+        System.out.println();
+        
         System.out.println("Thank you for running this program!");
     }
 }

@@ -14,11 +14,11 @@ public class XY_Tree {
         dataset = new ArrayList<>();
         for(int i = 0; i < coordinates; i++) {
             System.out.println("Enter values for coordinate pair#" + (i + 1));
-            dataset.add(new Coordinate());
+            this.dataset.add(new Coordinate());
         }
     }
 
-    public void set(double x, double y) { dataset.add(new Coordinate(x,y)); }
+    public void set(double x, double y) { this.dataset.add(new Coordinate(x,y)); }
     public XY_Tree(ArrayList<Coordinate> dataset) { this.dataset = dataset; }
 
     public void setValue(double value) {
@@ -69,6 +69,21 @@ public class XY_Tree {
         return equation;
     }
 
+    public double LagrangeValue(int order) {
+        double sum = 0.0;
+
+        for(int i = 0; i < order; i++) {
+            double factor = 1.0;
+            for (int j = 0; j < order; j++)
+                if (j != i)
+                    factor *= (xValue(-1, j) / xValue(i, j));
+
+            sum += (factor * this.dataset.get(i).y);
+        }
+        return sum;
+    }
+
+    public double xValue(int i , int j) { return (i < 0 ? this.value : this.dataset.get(i).x) - this.dataset.get(j).x; }
     public String xOf(int i, int j) { return "(" + Double.toString(i < 0 ? this.value : this.dataset.get(i).x)+ "-" + this.dataset.get(j).x + ")"; }
     public String x(int i, int j) { return "(x" + (i < 0 ? "": i) + " - x" + j + ")"; }
 
